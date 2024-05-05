@@ -52,8 +52,20 @@ a {
   padding: 20px;
   margin: 15px;
 }
+.container-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
 .msg-container h4 {
   margin: 10px;
+}
+hr {
+  border: 0;
+  height: 1px;
+  background-color: black;
+  margin: 20px 0;
 }
 
 .create-msg {

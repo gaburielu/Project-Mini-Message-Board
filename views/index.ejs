@@ -7,8 +7,14 @@
 
       <div class="msg-container">
         <% messages.forEach(message => { %>
-        <h4 class="user"><%= message.user %></h4>
-        <p class="message"><%= message.message %></p>
+        <div class="message-container">
+          <div class="container-top">
+            <h4 class="user"><%= message.user %></h4>
+            <p class="date"><%= message.formattedDate %></p>
+          </div>
+          <p class="message"><%= message.message %></p>
+          <hr />
+        </div>
         <% }) %>
       </div>
 
@@ -21,6 +27,17 @@
         .addEventListener("click", function () {
           window.location.href = "/new";
         });
+
+      function formatDate(dateString) {
+        const date = new Date(dateString);
+        const options = {
+          day: "numeric",
+          month: "short",
+          hour: "numeric",
+          minute: "numeric",
+        };
+        return date.toLocaleDateString("en-GB", options);
+      }
     </script>
   </body>
 </html>

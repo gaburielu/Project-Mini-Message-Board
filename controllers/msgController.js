@@ -2,10 +2,26 @@ const express = require("express");
 const Message = require("../models/message");
 
 const msg_index = (req, res) => {
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      const options = {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+      };
+      return date.toLocaleDateString("en-GB", options);
+    };
+  
     Message.find()
       .sort({ createdAt: -1 })
       .then((result) => {
-        res.render("index", { messages: result, title: "Message Board" });
+        const formattedMessages = result.map((message) => ({
+          ...message._doc,
+          formattedDate: formatDate(message.createdAt),
+        }));
+        res.render("index", { messages: formattedMessages, title: "Message Board" });
       })
       .catch((err) => {
         console.log(err);
